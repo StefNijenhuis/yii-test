@@ -119,7 +119,7 @@ class ActivityController extends Controller
                 'model' => $this->findModel($id),
             ]);
         } else {
-            throw new \Exception('You are not allowed to access this page');
+            print_r("pech"); die();
         }
     }
 
