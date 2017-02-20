@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Category;
+use common\models\Activity;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Activity */
@@ -29,11 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'value' => $model->user->username,
+            ],
             'title',
-            'type',
+            [
+                'attribute' => 'type',
+                'value' => Activity::getSingleType($model->type),
+            ],
             'description:ntext',
-            'category',
+            [
+                'attribute' => 'category',
+                'value' => Category::getTitle($model->category),
+            ],
             'image:ntext',
         ],
     ]) ?>
