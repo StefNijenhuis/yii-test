@@ -60,10 +60,18 @@ class Category extends \yii\db\ActiveRecord
         $array = explode(',', $categories);
 
         foreach ($array as &$category) {
-            $category = Category::findOne($category)->getAttribute('title');
+            if (Category::findOne($category)) {
+                $category = Category::findOne($category)->getAttribute('title');
+            }
         }
 
         unset($category);
         return implode(', ', $array);
+    }
+
+    public function getActivities()
+    {
+        return $this->hasMany(Activity::className(), ['id' => 'activity_id'])
+            ->viaTable('activity_category', ['activity_id' => 'id']);
     }
 }

@@ -84,4 +84,10 @@ class Activity extends \yii\db\ActiveRecord
 
         return $array[$type];
     }
+
+    public function getCategories()
+    {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])
+            ->viaTable('activity_category', ['category_id' => 'id']);
+    }
 }
